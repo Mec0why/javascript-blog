@@ -45,6 +45,8 @@
 
     /* get the article id */
 
+    let html = "";
+
     for (let article of articles) {
       const articleId = article.getAttribute("id");
       console.log(articleId);
@@ -64,8 +66,10 @@
       console.log(linkHTML);
 
       /* insert link into titleList */
-      titleList.insertAdjacentHTML("beforeend", linkHTML);
+      html = html + linkHTML;
+      console.log(html);
     }
+    titleList.innerHTML = html;
   };
 
   generateTitleLinks();
