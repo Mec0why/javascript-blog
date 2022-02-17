@@ -121,4 +121,27 @@
   };
 
   addClickListenersToTags();
+
+  const generateAuthors = function () {
+    const articles = document.querySelectorAll(optArticleSelector);
+
+    for (let article of articles) {
+      const authorWrappers = article.querySelector('.post-author');
+
+      let html = '';
+
+      const articleAuthors = article.getAttribute('data-author');
+
+      for (let articleAuthor of articleAuthors) {
+        const linkHTML =
+          '<a href="' + articleAuthor + '">' + articleAuthor + '</a>';
+
+        html = html + linkHTML;
+      }
+
+      authorWrappers.innerHTML = 'by ' + html;
+    }
+  };
+
+  generateAuthors();
 }
