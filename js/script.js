@@ -29,12 +29,14 @@
     optTitleListSelector = '.titles',
     optArticleTagsSelector = '.post-tags .list';
 
-  const generateTitleLinks = function () {
+  const generateTitleLinks = function (customSelector = '') {
     const titleList = document.querySelector(optTitleListSelector);
 
     titleList.innerHTML = '';
 
-    const articles = document.querySelectorAll(optArticleSelector);
+    const articles = document.querySelectorAll(
+      optArticleSelector + customSelector
+    );
 
     let html = '';
 
@@ -108,7 +110,7 @@
       hrefLink.classList.add('active');
     }
 
-    generateTitleLinks(optArticleSelector);
+    generateTitleLinks('[data-tags~="' + tag + '"]');
   };
 
   const addClickListenersToTags = function () {
