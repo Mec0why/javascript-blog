@@ -3,14 +3,16 @@
         "browser": true,
         "es6": true
     },
-    "extends": "eslint:recommended",
-    "parserOptions": {
+    "extends": ["eslint:recommended","prettier"],   
+	"parserOptions": {
         "ecmaVersion": 2015
     },
     "rules": {
-        "indent": [
-            "error",
-            2
+        "linebreak-style": [
+            "off"
+        ],
+        "no-console": [
+            "off"
         ],
         "linebreak-style": [
             "off"
@@ -19,10 +21,6 @@
             "error",
             "single",
             {"allowTemplateLiterals": true}
-        ],
-        "semi": [
-            "error",
-            "always"
         ],
         "no-console": [
             "off"
