@@ -95,16 +95,23 @@
     }
     const tagList = document.querySelector(optTagsListSelector);
 
-    // tagList.innerHTML = allTags.join(' ');
-    console.log(allTags);
-
     let allTagsHTML = '';
 
     for (let tag in allTags) {
-      allTagsHTML += tag + ' (' + allTags[tag] + ') ';
+      allTagsHTML +=
+        '<li><a href="#tag-' +
+        tag +
+        '">' +
+        tag +
+        '</a>' +
+        ' (' +
+        allTags[tag] +
+        ')' +
+        '</li>';
     }
 
     tagList.innerHTML = allTagsHTML;
+    console.log(allTagsHTML);
   };
 
   generateTags();
