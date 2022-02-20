@@ -67,7 +67,7 @@
   generateTitleLinks();
 
   const generateTags = function () {
-    let allTags = [];
+    let allTags = {};
 
     const articles = document.querySelectorAll(optArticleSelector);
 
@@ -85,15 +85,18 @@
 
         html = html + linkHTML;
 
-        if (allTags.indexOf(linkHTML) == -1) {
-          allTags.push(linkHTML);
+        if (!allTags[tag]) {
+          allTags[tag] = 1;
+        } else {
+          allTags[tag]++;
         }
       }
       tagWrappers.innerHTML = html;
     }
     const tagList = document.querySelector(optTagsListSelector);
 
-    tagList.innerHTML = allTags.join(' ');
+    // tagList.innerHTML = allTags.join(' ');
+    console.log(allTags);
   };
 
   generateTags();
