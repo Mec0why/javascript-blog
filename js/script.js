@@ -75,7 +75,6 @@
     };
 
     for (let tag in tags) {
-      console.log(tag + ' is used ' + tags[tag] + ' times');
       if (tags[tag] > params.max) {
         params.max = tags[tag];
       }
@@ -125,7 +124,6 @@
     const tagList = document.querySelector(optTagsListSelector);
 
     const tagsParams = calculateTagsParams(allTags);
-    console.log('tagsParams:', tagsParams);
 
     let allTagsHTML = '';
 
@@ -138,15 +136,10 @@
         calculateTagClass(allTags[tag], tagsParams) +
         '">' +
         tag +
-        '</a>' +
-        ' (' +
-        allTags[tag] +
-        ')' +
-        '</li>';
+        '</a></li>';
     }
 
     tagList.innerHTML = allTagsHTML;
-    console.log(allTagsHTML);
   };
 
   generateTags();
