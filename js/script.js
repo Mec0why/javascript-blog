@@ -97,6 +97,14 @@
 
     // tagList.innerHTML = allTags.join(' ');
     console.log(allTags);
+
+    let allTagsHTML = '';
+
+    for (let tag in allTags) {
+      allTagsHTML += tag + ' (' + allTags[tag] + ') ';
+    }
+
+    tagList.innerHTML = allTagsHTML;
   };
 
   generateTags();
