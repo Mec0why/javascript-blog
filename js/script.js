@@ -28,6 +28,8 @@
     optTitleSelector = '.post-title',
     optTitleListSelector = '.titles',
     optArticleTagsSelector = '.post-tags .list',
+    optCloudClassCount = 5,
+    optCloudClassPrefix = 'tag-size-',
     optTagsListSelector = '.tags.list';
 
   const generateTitleLinks = function (customSelector = '') {
@@ -85,6 +87,14 @@
     return params;
   };
 
+  const calculateTagClass = function (count, params) {
+    const normalizedCount = count - params.min;
+    const normalizedMax = params.max - params.min;
+    const percentage = normalizedCount / normalizedMax;
+    const classNumber = Math.floor(percentage * (optCloudClassCount - 1) + 1);
+    return optCloudClassPrefix + classNumber;
+  };
+
   const generateTags = function () {
     let allTags = {};
 
@@ -123,6 +133,9 @@
       allTagsHTML +=
         '<li><a href="#tag-' +
         tag +
+        '"' +
+        ' class="' +
+        calculateTagClass(allTags[tag], tagsParams) +
         '">' +
         tag +
         '</a>' +
