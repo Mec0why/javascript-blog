@@ -9,6 +9,9 @@
     authorLink: Handlebars.compile(
       document.querySelector('#template-author-link').innerHTML
     ),
+    tagCloudLink: Handlebars.compile(
+      document.querySelector('#template-tag-cloud-link').innerHTML
+    ),
   };
 
   const titleClickHandler = function (event) {
@@ -143,10 +146,11 @@
 
     const tagsParams = calculateTagsParams(allTags);
 
-    let allTagsHTML = '';
+    /* let allTagsHTML = ''; */
+    const allTagsData = { tags: [] };
 
     for (let tag in allTags) {
-      allTagsHTML +=
+      /*allTagsHTML +=
         '<li><a href="#tag-' +
         tag +
         '"' +
@@ -154,10 +158,17 @@
         calculateTagClass(allTags[tag], tagsParams) +
         '">' +
         tag +
-        '</a></li>';
+        '</a></li>';*/
+
+      allTagsData.tags.push({
+        tag: tag,
+        count: allTags[tag],
+        className: calculateTagClass(allTags[tag], tagsParams),
+      });
     }
 
-    tagList.innerHTML = allTagsHTML;
+    tagList.innerHTML = templates.tagCloudLink(allTagsData);
+    console.log(allTagsData);
   };
 
   generateTags();
