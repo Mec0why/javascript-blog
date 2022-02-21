@@ -12,6 +12,9 @@
     tagCloudLink: Handlebars.compile(
       document.querySelector('#template-tag-cloud-link').innerHTML
     ),
+    authorListLink: Handlebars.compile(
+      document.querySelector('#template-author-list-link').innerHTML
+    ),
   };
 
   const titleClickHandler = function (event) {
@@ -256,10 +259,11 @@
 
     const authorsParams = calculateAuthorsParams(allAuthors);
 
-    let allAuthorsHTML = '';
+    /*let allAuthorsHTML = '';*/
+    const allAuthorsData = { authors: [] };
 
     for (let author in allAuthors) {
-      allAuthorsHTML +=
+      /*allAuthorsHTML +=
         '<li><a href="#author-' +
         author +
         '"' +
@@ -271,10 +275,17 @@
         ' (' +
         allAuthors[author] +
         ')' +
-        '</li>';
+        '</li>'; */
+
+      allAuthorsData.authors.push({
+        author: author,
+        count: allAuthors[author],
+        className: calculateTagClass(allAuthors[author], authorsParams),
+      });
     }
 
-    authorList.innerHTML = allAuthorsHTML;
+    authorList.innerHTML = templates.authorListLink(allAuthorsData);
+    console.log(allAuthorsData);
   };
 
   generateAuthors();
