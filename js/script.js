@@ -180,6 +180,24 @@
 
   const optArticleAuthorSelector = '.post-author';
 
+  const calculateAuthorsParams = function (authors) {
+    const params = {
+      max: 0,
+      min: 9999999,
+    };
+
+    for (let author in authors) {
+      if (authors[author] > params.max) {
+        params.max = authors[author];
+      }
+      if (authors[author] < params.min) {
+        params.min = authors[author];
+      }
+    }
+
+    return params;
+  };
+
   const generateAuthors = function () {
     let allAuthors = {};
 
@@ -190,37 +208,40 @@
 
       let html = '';
 
-      const articleAuthors = article.getAttribute('data-author');
+      const author = article.getAttribute('data-author');
 
-      const linkHTML =
-        '<a href="#author-' + articleAuthors + '">' + articleAuthors + '</a>';
+      const linkHTML = '<a href="#author-' + author + '">' + author + '</a>';
 
       html = html + linkHTML;
 
-      if (!allAuthors[articleAuthors]) {
-        allAuthors[articleAuthors] = 1;
+      if (!allAuthors[author]) {
+        allAuthors[author] = 1;
       } else {
-        allAuthors[articleAuthors]++;
+        allAuthors[author]++;
       }
 
       authorWrappers.innerHTML = 'by ' + html;
     }
     const authorList = document.querySelector(optAuthorsListSelector);
 
-    /*  const authorsParams = calculateAuthorParams(allAuthors);*/
+    const authorsParams = calculateAuthorsParams(allAuthors);
 
     let allAuthorsHTML = '';
 
-    for (let articleAuthors in allAuthors) {
+    for (let author in allAuthors) {
       allAuthorsHTML +=
         '<li><a href="#author-' +
-        articleAuthors +
+        author +
         '"' +
         ' class="' +
-        /*calculateTagClass(allAuthors[articleAuthors], authorsParams) +*/
+        calculateTagClass(allAuthors[author], authorsParams) +
         '">' +
-        articleAuthors +
-        '</a></li>';
+        author +
+        '</a>' +
+        ' (' +
+        allAuthors[author] +
+        ')' +
+        '</li>';
     }
 
     authorList.innerHTML = allAuthorsHTML;
