@@ -125,7 +125,9 @@
       const articleTagsArray = articleTags.split(' ');
 
       for (let tag of articleTagsArray) {
-        const linkHTML = '<li><a href="#tag-' + tag + '">' + tag + '</a></li>';
+        /*const linkHTML = '<li><a href="#tag-' + tag + '">' + tag + '</a></li>';*/
+        const linkHTMLData = { id: tag, title: tag };
+        const linkHTML = templates.tagLink(linkHTMLData);
 
         html = html + linkHTML;
 
@@ -225,7 +227,9 @@
 
       const author = article.getAttribute('data-author');
 
-      const linkHTML = '<a href="#author-' + author + '">' + author + '</a>';
+      /* const linkHTML = '<a href="#author-' + author + '">' + author + '</a>';*/
+      const linkHTMLData = { id: author, title: author };
+      const linkHTML = templates.authorLink(linkHTMLData);
 
       html = html + linkHTML;
 
